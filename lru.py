@@ -31,11 +31,10 @@ class LRU:
         """
         if key in self.lru_cache:
             self.lru_cache.pop(key)
+        elif self.remaining == 0:
+            self.lru_cache.popitem(last=False)
         else:
-            if self.remaining == 0:
-                self.lru_cache.popitem(last=False)
-            else:
-                self.remaining -= 1
+            self.remaining -= 1
         self.lru_cache[key] = value
 
 
